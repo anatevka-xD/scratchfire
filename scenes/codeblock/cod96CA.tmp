@@ -1,0 +1,168 @@
+[gd_scene load_steps=11 format=3 uid="uid://gii3k1sf5a0g"]
+
+[ext_resource type="Script" path="res://scenes/codeblock/codeblock.gd" id="1_bsghr"]
+[ext_resource type="Theme" uid="uid://bxy7sal2n5myb" path="res://codeblock.tres" id="1_rconc"]
+[ext_resource type="PackedScene" uid="uid://c3k8rw3uw8brw" path="res://scenes/draggable/draggable.tscn" id="2_257dc"]
+[ext_resource type="Texture2D" uid="uid://d25gw4ykvbt48" path="res://textures/gui/brackets_start.png" id="2_h00s7"]
+[ext_resource type="Texture2D" uid="uid://dg47eu548eljn" path="res://textures/gui/top_bar_end.png" id="4_utwus"]
+[ext_resource type="Texture2D" uid="uid://bm5q2cjtag8b" path="res://textures/gui/types_indicator.png" id="5_rq66s"]
+[ext_resource type="Texture2D" uid="uid://daegepgbdg8b1" path="res://textures/gui/inventory_indicator.png" id="6_0nt10"]
+[ext_resource type="Texture2D" uid="uid://t4njwwdc6cn8" path="res://textures/gui/brackets_wall.png" id="7_2w8yo"]
+[ext_resource type="Texture2D" uid="uid://nsyoxst3is2a" path="res://textures/gui/brackets_end.png" id="8_643jp"]
+[ext_resource type="Texture2D" uid="uid://6he5qd1j5g6w" path="res://textures/gui/bottom_bar_end.png" id="9_d6ot5"]
+
+[node name="Codeblock" type="PanelContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+offset_right = 178.0
+offset_bottom = 56.0
+theme = ExtResource("1_rconc")
+script = ExtResource("1_bsghr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Top" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Texture" type="PanelContainer" parent="VBoxContainer/Top"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Top/Texture"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/Top/Texture/HBoxContainer"]
+custom_minimum_size = Vector2(48, 32)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Top/Texture/HBoxContainer/Control"]
+layout_mode = 2
+offset_right = 48.0
+offset_bottom = 36.0
+texture = ExtResource("2_h00s7")
+stretch_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/Top/Texture/HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture = ExtResource("4_utwus")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Info" type="PanelContainer" parent="VBoxContainer/Top"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Top/Info"]
+layout_mode = 2
+
+[node name="Spacer" type="PanelContainer" parent="VBoxContainer/Top/Info/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="CodeblockName" type="Label" parent="VBoxContainer/Top/Info/HBoxContainer"]
+layout_mode = 2
+text = "MISSINGNO."
+
+[node name="Spacer2" type="PanelContainer" parent="VBoxContainer/Top/Info/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="TypesIndicator" type="HBoxContainer" parent="VBoxContainer/Top/Info/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Top/Info/HBoxContainer/TypesIndicator"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_rq66s")
+expand_mode = 1
+
+[node name="Spacer" type="PanelContainer" parent="VBoxContainer/Top/Info/HBoxContainer/TypesIndicator"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="InventoryIndicator" type="HBoxContainer" parent="VBoxContainer/Top/Info/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Top/Info/HBoxContainer/InventoryIndicator"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_0nt10")
+expand_mode = 1
+
+[node name="Spacer" type="PanelContainer" parent="VBoxContainer/Top/Info/HBoxContainer/InventoryIndicator"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="Draggable" parent="VBoxContainer/Top" instance=ExtResource("2_257dc")]
+layout_mode = 2
+
+[node name="Bracket" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Bracket"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/Bracket/HBoxContainer"]
+custom_minimum_size = Vector2(16, 6)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+texture = ExtResource("7_2w8yo")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Contents" type="PanelContainer" parent="VBoxContainer/Bracket/HBoxContainer"]
+layout_mode = 2
+
+[node name="End" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Texture" type="PanelContainer" parent="VBoxContainer/End"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/End/Texture"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/End/Texture/HBoxContainer"]
+custom_minimum_size = Vector2(48, 16)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/End/Texture/HBoxContainer/Control"]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 20.0
+texture = ExtResource("8_643jp")
+stretch_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/End/Texture/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture = ExtResource("9_d6ot5")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Draggable" parent="VBoxContainer/End" instance=ExtResource("2_257dc")]
+layout_mode = 2
+
+[node name="Attached" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2

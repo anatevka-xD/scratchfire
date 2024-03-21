@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bxy7sal2n5myb"]
+
+[ext_resource type="FontFile" uid="uid://bi8fx3dpcndfd" path="res://fonts/Minecraft.otf" id="1_w4jfc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4eoq5"]
+
+[resource]
+Button/font_sizes/font_size = 18
+Button/fonts/font = ExtResource("1_w4jfc")
+HBoxContainer/constants/separation = 0
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/font_sizes/font_size = 18
+Label/fonts/font = ExtResource("1_w4jfc")
+PanelContainer/styles/panel = SubResource("StyleBoxEmpty_4eoq5")
+PopupMenu/constants/icon_max_width = 16
+PopupMenu/font_sizes/font_size = 18
+PopupMenu/fonts/font = ExtResource("1_w4jfc")
+VBoxContainer/constants/separation = 0

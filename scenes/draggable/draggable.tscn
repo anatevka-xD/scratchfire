@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3k8rw3uw8brw"]
+
+[ext_resource type="Script" path="res://scenes/draggable/draggable.gd" id="1_46xsl"]
+
+[node name="Draggable" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_46xsl")
