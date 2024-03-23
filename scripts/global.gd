@@ -131,6 +131,7 @@ func _ready():
 	for action in json["actions"]:
 		codeblock_actions[action["codeblockName"]][action["name"]] = action
 	
+	#Set up codeblock categories
 	for categories in json["codeblockCategories"]:
 		var categories_name = categories["name"]
 		var codeblock_name = codeblock_category_display_names[categories_name]
@@ -147,66 +148,17 @@ func _ready():
 func _process(_delta):
 	#Update selected object's position
 	if selected_object != null:
-		if dragging:
-			selected_object.global_position = selected_offset + get_global_mouse_position()
-			
-			if selected_object.draggable_type == "inventory":
-				if selected_object.placement == "float":
-					selected_object.offset = selected_object.codeblock.global_position + Vector2(selected_object.codeblock.top_component.size.x, 0) - selected_object.global_position
-		else:
-			if click_location.distance_to(get_global_mouse_position()) > 10:
-				dragging = true
-				selected_object.reparent(main)
+		if selected_object.draggable_type == "codeblock":
+			drag_codeblock()
+		if selected_object.draggable_type == "inventory":
+			drag_inventory()
 	
 	#Let go of selected object
 	if Input.is_action_just_released("LeftMouse"):
 		if selected_object != null:
-			var mouse_position = get_global_mouse_position()
-			var hovered_interactables = []
-			var selected_interactable
-			
-			#Get interactables the mouse is over
-			for interactable in interactables:
-				var interactable_rect = Rect2(to_global(interactable.global_position), interactable.size)
-				if interactable_rect.has_point(mouse_position):
-					if interactable.parent != selected_object:
-						hovered_interactables.append(interactable)
-					else:
-						selected_interactable = interactable
-			
-			if hovered_interactables.size() > 0:
-				#Select topmost interactable
-				var top_interactable = hovered_interactables[0]
-				
-				for interactable in hovered_interactables:
-					if interactable.parent.get_index() > top_interactable.parent.get_index():
-						top_interactable = interactable
-				
-				#If the object can be dropped onto the topmost interactable
-				if top_interactable.receive_type == selected_interactable.drop_type:
-					#If the object is a codeblock
-					if selected_interactable.drop_type == "codeblock":
-							var selected_children = selected_object.attached.get_children()
-							var target_children = top_interactable.body.get_children()
-							
-							#If the selected object and the target object both have child objects
-							if !selected_children.is_empty() && !target_children.is_empty():
-								
-								var last_child = null
-								
-								while not selected_children.is_empty():
-									last_child = selected_children[0]
-									selected_children = selected_children[0].attached.get_children()
-								
-								#Parent target children to end of selected codeblock's children
-								target_children[0].reparent(last_child.attached)
-							#If only the top interactable has children
-							elif !target_children.is_empty():
-								#Parent target children to selected codeblock
-								target_children[0].reparent(selected_object.attached)
-							
-							#Add selected codeblock to target codeblock
-							selected_object.reparent(top_interactable.body)
+			#Handle codeblock dragging
+			if selected_object.draggable_type == "codeblock":
+				drop_codeblock()
 			
 			#Deselect object
 			dragging = false
@@ -216,16 +168,12 @@ func _process(_delta):
 func _button_down(draggable):
 	#Select object
 	var clicked_object = draggable.parent
-
-	if clicked_object.get_parent() == main:
-		dragging = true
-		selected_object = clicked_object
-		selected_offset = selected_object.global_position - get_global_mouse_position()
-		selected_object.move_to_front()
-	else:
-		click_location = get_global_mouse_position()
-		selected_object = clicked_object
-		selected_offset = selected_object.global_position - get_global_mouse_position()
+	
+	if clicked_object.draggable_type == "codeblock":
+		select_codeblock(clicked_object)
+	
+	if clicked_object.draggable_type == "inventory":
+		select_inventory(clicked_object)
 
 func strip_color(text : String):
 	if text.begins_with("§x"):
@@ -237,3 +185,103 @@ func strip_color(text : String):
 	else:
 		return text
 
+func select_inventory(clicked_object):
+	if clicked_object.placement != "snap":
+		dragging = true
+		selected_object = clicked_object
+		selected_offset = selected_object.global_position - get_global_mouse_position()
+		selected_object.move_to_front()
+	else:
+		click_location = get_global_mouse_position()
+		selected_object = clicked_object
+		selected_offset = selected_object.global_position - get_global_mouse_position()
+
+func drop_codeblock():
+	var mouse_position = get_global_mouse_position()
+	var hovered_interactables = []
+	var selected_interactable
+	
+	#Get interactables the mouse is over
+	for interactable in interactables:
+		var interactable_rect = Rect2(to_global(interactable.global_position), interactable.size)
+		if interactable_rect.has_point(mouse_position):
+			if interactable.parent != selected_object:
+				hovered_interactables.append(interactable)
+			else:
+				selected_interactable = interactable
+	
+	if hovered_interactables.size() > 0:
+		#Select topmost interactable
+		var top_interactable = hovered_interactables[0]
+		
+		for interactable in hovered_interactables:
+			if interactable.parent.get_index() > top_interactable.parent.get_index():
+				top_interactable = interactable
+		
+		#If the object can be dropped onto the topmost interactable
+		if top_interactable.receive_type == selected_interactable.drop_type:
+			#If the object is a codeblock
+			if selected_interactable.drop_type == "codeblock":
+					var selected_children = selected_object.attached.get_children()
+					var target_children = top_interactable.body.get_children()
+					
+					#If the selected object and the target object both have child objects
+					if !selected_children.is_empty() && !target_children.is_empty():
+						
+						var last_child = null
+						
+						while not selected_children.is_empty():
+							last_child = selected_children[0]
+							selected_children = selected_children[0].attached.get_children()
+						
+						#Parent target children to end of selected codeblock's children
+						target_children[0].reparent(last_child.attached)
+					#If only the top interactable has children
+					elif !target_children.is_empty():
+						#Parent target children to selected codeblock
+						target_children[0].reparent(selected_object.attached)
+					
+					#Add selected codeblock to target codeblock
+					selected_object.reparent(top_interactable.body)
+
+func select_codeblock(clicked_object):
+	if clicked_object.get_parent() == main:
+		dragging = true
+		selected_object = clicked_object
+		selected_offset = selected_object.global_position - get_global_mouse_position()
+		selected_object.move_to_front()
+	else:
+		click_location = get_global_mouse_position()
+		selected_object = clicked_object
+		selected_offset = selected_object.global_position - get_global_mouse_position()
+
+func drag_codeblock():
+	if dragging:
+		selected_object.global_position = selected_offset + get_global_mouse_position()
+		
+		if selected_object.draggable_type == "inventory":
+			if selected_object.placement == "float":
+				selected_object.offset = selected_object.codeblock.global_position + Vector2(selected_object.codeblock.top_component.size.x, 0) - selected_object.global_position
+	else:
+		if click_location.distance_to(get_global_mouse_position()) > 10:
+			dragging = true
+			
+			selected_object.reparent(main)
+
+func drag_inventory():
+	if dragging:
+		selected_object.global_position = selected_offset + get_global_mouse_position()
+		
+		if selected_object.placement == "float":
+			selected_object.offset = selected_object.codeblock.global_position + Vector2(selected_object.codeblock.top_component.size.x, 0) - selected_object.global_position
+	else:
+		if click_location.distance_to(get_global_mouse_position()) > 10:
+			dragging = true
+			
+			selected_object.offset = selected_object.codeblock.global_position + Vector2(selected_object.codeblock.top_component.size.x, 0) - selected_object.global_position
+			selected_object.placement = "float"
+			selected_object.snap_button.disabled = true
+			selected_object.fix_button.disabled = false
+			selected_object.float_button.disabled = false
+			selected_object.anchor_line.show()
+			selected_object.reparent(main)

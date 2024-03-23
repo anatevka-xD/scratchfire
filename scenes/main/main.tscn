@@ -7,27 +7,28 @@
 script = ExtResource("1_oc7sk")
 
 [node name="CodeblockMenu" type="VBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme = ExtResource("2_c4b70")
 
 [node name="FPSCounter" type="Label" parent="."]
 offset_top = 625.0
-offset_right = 40.0
+offset_right = 1.0
 offset_bottom = 648.0
+size_flags_horizontal = 0
 
 [node name="TargetTypeMenuButton" type="MenuButton" parent="."]
 self_modulate = Color(1, 1, 1, 0)
-offset_right = 32.0
-offset_bottom = 32.0
+offset_right = 8.0
+offset_bottom = 8.0
 mouse_filter = 2
 theme = ExtResource("2_c4b70")
 disabled = true
 
 [node name="ActionTypeMenuButton" type="MenuButton" parent="."]
 self_modulate = Color(1, 1, 1, 0)
-offset_right = 32.0
-offset_bottom = 32.0
+offset_right = 8.0
+offset_bottom = 8.0
 mouse_filter = 2
 theme = ExtResource("2_c4b70")
 disabled = true

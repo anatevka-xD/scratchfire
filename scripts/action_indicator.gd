@@ -58,7 +58,6 @@ func _on_panel_container_gui_input(event):
 					if not action_display_name.contains("(Old)"):
 						icon = load("res://textures/items/" + icon_material + ".png")
 						
-						print(associated_actions[action]["name"])
 						action_type_menu.add_icon_item(icon, Global.strip_color(action_display_name))
 		
 		#Connect codeblock to the popupmenu 
