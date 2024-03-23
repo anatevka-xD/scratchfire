@@ -1,5 +1,7 @@
 extends PanelContainer
 
+@onready var inventory_scene = preload("res://scenes/inventory/inventory.tscn")
+
 @onready var label = $VBoxContainer/Top/Info/HBoxContainer/CodeblockName
 @onready var top_texture = $VBoxContainer/Top/Texture/HBoxContainer/Control/TextureRect
 @onready var top_component = $VBoxContainer/Top
@@ -18,13 +20,16 @@ extends PanelContainer
 	$VBoxContainer/End/Texture
 ]
 
+var draggable_type = "codeblock"
+
 var lower_interactable
 var contents
+var inventory
 
 var data = {}
-var inventory = {}
 
 func _ready():
+	
 	#Modulate textures
 	for node in modulated_nodes:
 		node.modulate = data["color"]
@@ -35,8 +40,14 @@ func _ready():
 	data["target"] = "NONE"
 	
 	#Set up codeblock indicators
-	if not data["has_inventory"]:
+	if not data["has_inventory"]: 	
 		inventory_indicator.queue_free()
+	else:
+		#Create inventory
+		inventory = inventory_scene.instantiate()
+		inventory.codeblock = self
+		
+		Global.main.add_child(inventory)
 	
 	if not data["has_target"]:
 		target_indicator.queue_free()

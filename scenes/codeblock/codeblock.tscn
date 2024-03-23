@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gii3k1sf5a0g"]
+[gd_scene load_steps=16 format=3 uid="uid://gii3k1sf5a0g"]
 
 [ext_resource type="Script" path="res://scenes/codeblock/codeblock.gd" id="1_bsghr"]
 [ext_resource type="Theme" uid="uid://bxy7sal2n5myb" path="res://themes/codeblock.tres" id="1_t3j6a"]
@@ -10,10 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://daegepgbdg8b1" path="res://textures/gui/inventory_indicator.png" id="6_0nt10"]
 [ext_resource type="Script" path="res://scripts/target_indicator.gd" id="6_uci2p"]
 [ext_resource type="Texture2D" uid="uid://t4njwwdc6cn8" path="res://textures/gui/brackets_wall.png" id="7_2w8yo"]
-[ext_resource type="Texture2D" uid="uid://bjdk5xq6fe3lp" path="res://textures/items/STRUCTURE_VOID.png" id="7_gs6yo"]
+[ext_resource type="Texture2D" uid="uid://b2flp35cpwf4q" path="res://textures/items/GRAY_BARRIER.png" id="7_rhlld"]
 [ext_resource type="Script" path="res://scripts/action_indicator.gd" id="8_4c3ql"]
 [ext_resource type="Texture2D" uid="uid://nsyoxst3is2a" path="res://textures/gui/brackets_end.png" id="8_643jp"]
 [ext_resource type="Texture2D" uid="uid://6he5qd1j5g6w" path="res://textures/gui/bottom_bar_end.png" id="9_d6ot5"]
+[ext_resource type="Script" path="res://scripts/inventory_indicator.gd" id="11_saocm"]
 
 [node name="Codeblock" type="PanelContainer"]
 texture_filter = 1
@@ -107,7 +108,7 @@ custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("7_gs6yo")
+texture = ExtResource("7_rhlld")
 expand_mode = 1
 
 [node name="Spacer" type="PanelContainer" parent="VBoxContainer/Top/Info/HBoxContainer/TargetIndicator"]
@@ -146,8 +147,12 @@ layout_mode = 2
 
 [node name="InventoryIndicator" type="HBoxContainer" parent="VBoxContainer/Top/Info/HBoxContainer"]
 layout_mode = 2
+script = ExtResource("11_saocm")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Top/Info/HBoxContainer/InventoryIndicator"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Top/Info/HBoxContainer/InventoryIndicator"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Top/Info/HBoxContainer/InventoryIndicator/PanelContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -225,3 +230,4 @@ mouse_filter = 2
 
 [connection signal="gui_input" from="VBoxContainer/Top/Info/HBoxContainer/TargetIndicator/PanelContainer" to="VBoxContainer/Top/Info/HBoxContainer/TargetIndicator" method="_on_panel_container_gui_input"]
 [connection signal="gui_input" from="VBoxContainer/Top/Info/HBoxContainer/ActionIndicator/PanelContainer" to="VBoxContainer/Top/Info/HBoxContainer/ActionIndicator" method="_on_panel_container_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/Top/Info/HBoxContainer/InventoryIndicator/PanelContainer" to="VBoxContainer/Top/Info/HBoxContainer/InventoryIndicator" method="_on_panel_container_gui_input"]

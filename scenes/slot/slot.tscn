@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwkvn2bkucgpu"]
+
+[ext_resource type="Texture2D" uid="uid://cwudguyaieslo" path="res://textures/gui/slot.png" id="1_7hsyu"]
+
+[node name="Slot" type="PanelContainer"]
+texture_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_7hsyu")

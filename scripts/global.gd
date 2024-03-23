@@ -72,7 +72,7 @@ var value_items = {
 }
 
 var player_target_types = {
-	"NONE": {"icon": "STRUCTURE_VOID"},
+	"NONE": {"icon": "GRAY_BARRIER"},
 	"CURRENT SELECTION": {"icon": "NETHER_STAR"},
 	"DEFAULT PLAYER": {"icon": "POTATO"},
 	"KILLER PLAYER": {"icon": "IRON_SWORD"},
@@ -83,7 +83,7 @@ var player_target_types = {
 }
 
 var entity_target_types = {
-	"NONE": {"icon": "STRUCTURE_VOID"},
+	"NONE": {"icon": "GRAY_BARRIER"},
 	"CURRENT SELECTION": {"icon": "NETHER_STAR"},
 	"DEFAULT ENTITY": {"icon": "POTATO"},
 	"KILLER ENTITY": {"icon": "IRON_SWORD"},
@@ -149,6 +149,10 @@ func _process(_delta):
 	if selected_object != null:
 		if dragging:
 			selected_object.global_position = selected_offset + get_global_mouse_position()
+			
+			if selected_object.draggable_type == "inventory":
+				if selected_object.placement == "float":
+					selected_object.offset = selected_object.codeblock.global_position + Vector2(selected_object.codeblock.top_component.size.x, 0) - selected_object.global_position
 		else:
 			if click_location.distance_to(get_global_mouse_position()) > 10:
 				dragging = true
@@ -187,7 +191,6 @@ func _process(_delta):
 							
 							#If the selected object and the target object both have child objects
 							if !selected_children.is_empty() && !target_children.is_empty():
-								print("Both target and selected children")
 								
 								var last_child = null
 								
@@ -213,7 +216,7 @@ func _process(_delta):
 func _button_down(draggable):
 	#Select object
 	var clicked_object = draggable.parent
-	
+
 	if clicked_object.get_parent() == main:
 		dragging = true
 		selected_object = clicked_object

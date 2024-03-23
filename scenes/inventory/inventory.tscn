@@ -1,0 +1,109 @@
+[gd_scene load_steps=8 format=3 uid="uid://qowyl3p2b5c3"]
+
+[ext_resource type="Script" path="res://scenes/inventory/inventory.gd" id="1_juwh2"]
+[ext_resource type="Texture2D" uid="uid://wt0mw5x4oixc" path="res://textures/gui/border.png" id="2_gxhc6"]
+[ext_resource type="Texture2D" uid="uid://bacpeakl3s6dc" path="res://textures/gui/dotted_line.png" id="2_r3srn"]
+[ext_resource type="PackedScene" uid="uid://c3k8rw3uw8brw" path="res://scenes/draggable/draggable.tscn" id="4_ygud1"]
+[ext_resource type="Texture2D" uid="uid://dho1ee616whd1" path="res://textures/gui/snap_icon.png" id="5_d1am8"]
+[ext_resource type="Texture2D" uid="uid://c2ua8oeb3r7nm" path="res://textures/gui/float_icon.png" id="6_j76ak"]
+[ext_resource type="Texture2D" uid="uid://cyslb2rh8tqoi" path="res://textures/gui/fix_icon.png" id="6_t6pcd"]
+
+[node name="Inventory" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_juwh2")
+
+[node name="Draggable" parent="." instance=ExtResource("4_ygud1")]
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = -1
+texture_filter = 1
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
+width = 5.0
+default_color = Color(0, 0, 0, 0.196078)
+texture = ExtResource("2_r3srn")
+texture_mode = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(178, 0)
+layout_mode = 2
+texture = ExtResource("2_gxhc6")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="PlacementButtons" type="HBoxContainer" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Snap" type="TextureButton" parent="VBoxContainer/PlacementButtons"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_d1am8")
+texture_pressed = ExtResource("5_d1am8")
+texture_hover = ExtResource("5_d1am8")
+texture_disabled = ExtResource("5_d1am8")
+texture_focused = ExtResource("5_d1am8")
+stretch_mode = 0
+
+[node name="Float" type="TextureButton" parent="VBoxContainer/PlacementButtons"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("6_j76ak")
+texture_pressed = ExtResource("6_j76ak")
+texture_hover = ExtResource("6_j76ak")
+texture_disabled = ExtResource("6_j76ak")
+texture_focused = ExtResource("6_j76ak")
+stretch_mode = 0
+
+[node name="Fix" type="TextureButton" parent="VBoxContainer/PlacementButtons"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("6_t6pcd")
+texture_pressed = ExtResource("6_t6pcd")
+texture_hover = ExtResource("6_t6pcd")
+texture_disabled = ExtResource("6_t6pcd")
+texture_focused = ExtResource("6_t6pcd")
+stretch_mode = 0
+
+[node name="Spacer" type="PanelContainer" parent="VBoxContainer/PlacementButtons"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 9
+
+[node name="Spacer3" type="PanelContainer" parent="VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="VBoxContainer/PlacementButtons/Snap" to="." method="_on_snap_pressed"]
+[connection signal="pressed" from="VBoxContainer/PlacementButtons/Float" to="." method="_on_float_pressed"]
+[connection signal="pressed" from="VBoxContainer/PlacementButtons/Fix" to="." method="_on_fix_pressed"]
