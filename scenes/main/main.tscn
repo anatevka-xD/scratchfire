@@ -6,9 +6,20 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_oc7sk")
 
-[node name="CodeblockMenu" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="CodeblockMenu" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme = ExtResource("2_c4b70")
+
+[node name="ValueMenu" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
 theme = ExtResource("2_c4b70")
 
 [node name="FPSCounter" type="Label" parent="."]

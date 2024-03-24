@@ -9,13 +9,14 @@ extends Control
 @onready var float_button = $HBoxContainer/PlacementButtons/Float
 @onready var fix_button = $HBoxContainer/PlacementButtons/Fix
 
+@onready var offset = codeblock.global_position + Vector2(codeblock.top_component.size.x, 0) - global_position
+
 var draggable_type = "inventory"
 
 var placement = "snap"
 
 var codeblock
 var contents
-@onready var offset = codeblock.global_position + Vector2(codeblock.top_component.size.x, 0) - global_position
 
 func _ready():
 	hide()
@@ -30,14 +31,12 @@ func _process(_delta):
 	var codeblock_offset = codeblock.global_position + Vector2(codeblock.top_component.size.x, 0)
 	var inventory_offset = codeblock.global_position + Vector2(codeblock.top_component.size.x, 16) - global_position
 	
-	
 	if placement == "snap":
 		global_position = codeblock_offset
 		
 		snap_button.disabled = true
 		fix_button.disabled = false
 		float_button.disabled = false
-	
 	if placement == "float":
 		global_position = codeblock_offset - offset
 		
@@ -45,25 +44,22 @@ func _process(_delta):
 		fix_button.disabled = false
 		float_button.disabled = true
 		
-		draw_anchor_line(anchor_line, anchor_line.position + Vector2(0, 32), inventory_offset)
-	
+		draw_anchor_line(anchor_line, anchor_line.position + Vector2(0, 16), inventory_offset)
 	if placement == "fix":
 		snap_button.disabled = false
 		fix_button.disabled = true
 		float_button.disabled = false
 		
-		draw_anchor_line(anchor_line, anchor_line.position + Vector2(0, 32), inventory_offset)
+		draw_anchor_line(anchor_line, anchor_line.position + Vector2(0, 16), inventory_offset)
 
 func _on_snap_pressed():
 	placement = "snap"
 	anchor_line.hide()
-
 func _on_float_pressed():
 	placement = "float"
 	anchor_line.show()
 	
 	offset = codeblock.global_position + Vector2(codeblock.top_component.size.x, 0) - global_position
-
 func _on_fix_pressed():
 	placement = "fix"
 	anchor_line.show()

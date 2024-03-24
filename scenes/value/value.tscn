@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://xkh0uscwkbo7"]
+
+[ext_resource type="Script" path="res://scenes/value/value.gd" id="1_ef4kq"]
+[ext_resource type="Theme" uid="uid://bxy7sal2n5myb" path="res://themes/codeblock.tres" id="1_su13m"]
+[ext_resource type="PackedScene" uid="uid://c3k8rw3uw8brw" path="res://scenes/draggable/draggable.tscn" id="2_722cb"]
+[ext_resource type="Texture2D" uid="uid://btdjih2ma677i" path="res://textures/items/MISSING_TEXTURE.png" id="2_yduop"]
+
+[node name="Value" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(32, 32)
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+theme = ExtResource("1_su13m")
+script = ExtResource("1_ef4kq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_yduop")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Draggable" parent="." instance=ExtResource("2_722cb")]
+layout_mode = 2
+
+[connection signal="gui_input" from="Draggable" to="." method="_on_draggable_gui_input"]

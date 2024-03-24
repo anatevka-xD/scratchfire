@@ -5,6 +5,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4eoq5"]
 
 [resource]
+Button/constants/icon_max_width = 16
 Button/font_sizes/font_size = 18
 Button/fonts/font = ExtResource("1_w4jfc")
 HBoxContainer/constants/separation = 0
@@ -15,6 +16,8 @@ Label/constants/shadow_offset_y = 2
 Label/constants/shadow_outline_size = 0
 Label/font_sizes/font_size = 18
 Label/fonts/font = ExtResource("1_w4jfc")
+LineEdit/font_sizes/font_size = 18
+LineEdit/fonts/font = ExtResource("1_w4jfc")
 PanelContainer/styles/panel = SubResource("StyleBoxEmpty_4eoq5")
 PopupMenu/constants/icon_max_width = 16
 PopupMenu/font_sizes/font_size = 18

@@ -12,7 +12,7 @@ extends PanelContainer
 @onready var target_indicator = $VBoxContainer/Top/Info/HBoxContainer/TargetIndicator
 @onready var upper_interactable = $VBoxContainer/Top/Draggable
 @onready var attached = $VBoxContainer/Attached
-@onready var target_indicator_icon = $VBoxContainer/Top/Info/HBoxContainer/TargetIndicator/PanelContainer/TextureRect
+@onready var target_indicator_icon = $VBoxContainer/Top/Info/HBoxContainer/TargetIndicator/TargetButton
 
 @onready var modulated_nodes = [
 	$VBoxContainer/Top/Texture,
