@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpaphd2nbenhj"]
+
+[ext_resource type="Theme" uid="uid://bxy7sal2n5myb" path="res://themes/codeblock.tres" id="1_11eux"]
+[ext_resource type="Script" path="res://scenes/value_edit_menu/sound_edit_menu/sound_edit_menu.gd" id="2_swaly"]
+
+[node name="SoundEditMenu" type="Control"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_11eux")
+script = ExtResource("2_swaly")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SoundTypeButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "Select Sound"
+alignment = 0
+icon_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+text = "Variant:"
+
+[node name="VariantButton" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+text = "Pitch:"
+
+[node name="Pitch" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0.0"
+expand_to_text_length = true
+context_menu_enabled = false
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+text = "Volume:"
+
+[node name="Volume" type="LineEdit" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0.0"
+expand_to_text_length = true
+context_menu_enabled = false
+
+[connection signal="pressed" from="VBoxContainer/SoundTypeButton" to="." method="_on_sound_type_button_pressed"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://csxyjb3wuvbvp"]
+
+[ext_resource type="Theme" uid="uid://bxy7sal2n5myb" path="res://themes/codeblock.tres" id="1_v2uus"]
+[ext_resource type="Script" path="res://scenes/value_edit_menu/variable_edit_menu/variable_edit_menu.gd" id="2_6aan7"]
+
+[node name="VariableEditMenu" type="Control"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_v2uus")
+script = ExtResource("2_6aan7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Name:"
+
+[node name="Name" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Variable"
+expand_to_text_length = true
+context_menu_enabled = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Scope:"
+
+[node name="Scope" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 4
+selected = 0
+popup/item_0/text = "GAME"
+popup/item_0/id = 0
+popup/item_1/text = "SAVE"
+popup/item_1/id = 1
+popup/item_2/text = "LOCAL"
+popup/item_2/id = 2
+popup/item_3/text = "LINE"
+popup/item_3/id = 3

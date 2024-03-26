@@ -6,19 +6,19 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_oc7sk")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Menus" type="HBoxContainer" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="CodeblockMenu" type="VBoxContainer" parent="HBoxContainer"]
+[node name="CodeblockMenu" type="VBoxContainer" parent="Menus"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("2_c4b70")
 
-[node name="ValueMenu" type="VBoxContainer" parent="HBoxContainer"]
+[node name="ValueMenu" type="VBoxContainer" parent="Menus"]
 layout_mode = 2
 theme = ExtResource("2_c4b70")
 
@@ -37,6 +37,30 @@ theme = ExtResource("2_c4b70")
 disabled = true
 
 [node name="ActionTypeMenuButton" type="MenuButton" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+theme = ExtResource("2_c4b70")
+disabled = true
+
+[node name="SoundTypeMenuButton" type="MenuButton" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+theme = ExtResource("2_c4b70")
+disabled = true
+
+[node name="ParticleTypeMenuButton" type="MenuButton" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+theme = ExtResource("2_c4b70")
+disabled = true
+
+[node name="PotionTypeMenu" type="MenuButton" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 offset_right = 8.0
 offset_bottom = 8.0

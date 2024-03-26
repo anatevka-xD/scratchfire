@@ -117,11 +117,13 @@ var click_location : Vector2
 
 var codeblock_actions : Dictionary
 var codeblock_categories : Dictionary
+var sounds : Dictionary
+var particles : Dictionary
+var potions : Dictionary
 
 var interactables : Array
 var inventories : Array
 var values : Array
-
 var items : Array
 
 var dragging = false
@@ -148,6 +150,18 @@ func _ready():
 			category_dictionary[category_name] = category_actions
 		
 		codeblock_categories[codeblock_name] = category_dictionary
+	#Set up sounds dictionary
+	for sound in json["sounds"]:
+		sounds[sound["sound"]] = sound
+	
+	#Set up particles dictionary
+	for particle in json["particles"]:
+		if particle["category"] != null:
+			particles[particle["particle"]] = particle
+	
+	#Set up potions dictionary
+	for potion in json["potions"]:
+		potions[potion["potion"]] = potion
 
 func _process(_delta):
 	#Update selected object's position
@@ -194,8 +208,8 @@ func _button_down(draggable):
 	if clicked_object.draggable_type == "value":
 		select_value(clicked_object)
 
-#Functions that control dragging
-
+##Functions that control dragging
+#Inventories
 func select_inventory(clicked_object):
 	if clicked_object.placement != "snap":
 		dragging = true
@@ -225,6 +239,7 @@ func drag_inventory():
 			selected_object.anchor_line.show()
 			selected_object.reparent(main)
 
+#Codeblocks
 func drop_codeblock():
 	var mouse_position = get_global_mouse_position()
 	var hovered_interactables = []
@@ -306,6 +321,7 @@ func drag_codeblock():
 			if selected_object.inventory:
 				selected_object.inventory.move_to_front()
 
+#Values
 func select_value(clicked_object):
 	if clicked_object.get_parent() == main:
 		dragging = true

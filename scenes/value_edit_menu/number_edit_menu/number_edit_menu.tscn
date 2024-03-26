@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://wox7g8s7lj8f"]
+
+[ext_resource type="Theme" uid="uid://bxy7sal2n5myb" path="res://themes/codeblock.tres" id="1_lsm17"]
+[ext_resource type="Script" path="res://scenes/value_edit_menu/number_edit_menu/number_edit_menu.gd" id="2_r3ufs"]
+
+[node name="NumberEditMenu" type="Control"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_lsm17")
+script = ExtResource("2_r3ufs")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 26.0
+text = "Number"
+expand_to_text_length = true
+context_menu_enabled = false

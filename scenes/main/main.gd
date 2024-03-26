@@ -3,19 +3,29 @@ extends Node2D
 @onready var codeblock_scene = preload("res://scenes/codeblock/codeblock.tscn")
 @onready var value_scene = preload("res://scenes/value/value.tscn")
 
-@onready var codeblock_menu = $HBoxContainer/CodeblockMenu
-@onready var value_menu = $HBoxContainer/ValueMenu
+@onready var codeblock_menu = $Menus/CodeblockMenu
+@onready var value_menu = $Menus/ValueMenu
 @onready var fps_counter = $FPSCounter
+
 @onready var target_type_menu_button = $TargetTypeMenuButton
 @onready var action_type_menu_button = $ActionTypeMenuButton
+@onready var sound_type_menu_button = $SoundTypeMenuButton
+@onready var particle_type_menu_button = $ParticleTypeMenuButton
+@onready var potion_type_menu_button = $PotionTypeMenu
 
 var target_type_menu
 var action_type_menu
+var sound_type_menu
+var particle_type_menu
+var potion_type_menu
 
 func _ready():
 	Global.main = self
 	target_type_menu = target_type_menu_button.get_popup()
 	action_type_menu = action_type_menu_button.get_popup()
+	sound_type_menu = sound_type_menu_button.get_popup()
+	particle_type_menu = particle_type_menu_button.get_popup()
+	potion_type_menu = potion_type_menu_button.get_popup()
 	
 	#Create variable menu buttons
 	for value_item in Global.value_items:
@@ -42,6 +52,30 @@ func _ready():
 		codeblock_menu_button.icon = icon
 		
 		codeblock_menu.add_child(codeblock_menu_button)
+	
+	#Create sounds popup button
+	for sound in Global.json["sounds"]:
+		var sound_display_name = sound["sound"].replace("_", " ").capitalize()
+		var icon_material = sound["icon"]["material"]
+		var icon = load("res://textures/items/" + icon_material + ".png")
+		
+		sound_type_menu.add_icon_item(icon, Global.strip_color(sound_display_name))
+	
+	#Create particles popup button
+	for particle in Global.json["particles"]:
+		var particle_display_name = particle["particle"].replace("_", " ").capitalize()
+		var icon_material = particle["icon"]["material"]
+		var icon = load("res://textures/items/" + icon_material + ".png")
+		
+		particle_type_menu.add_icon_item(icon, Global.strip_color(particle_display_name))
+	
+	#Create potions popup button
+	for potion in Global.json["potions"]:
+		var potion_display_name = potion["potion"].replace("_", " ").capitalize()
+		var icon_material = potion["icon"]["material"]
+		var icon = load("res://textures/items/" + icon_material + ".png")
+		
+		potion_type_menu.add_icon_item(icon, Global.strip_color(potion_display_name))
 
 func _process(_delta):
 	fps_counter.text = str(Engine.get_frames_per_second())

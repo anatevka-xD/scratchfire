@@ -1,20 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp55ypxba3omt"]
+[gd_scene load_steps=2 format=3 uid="uid://comw4ft65gavs"]
 
-[ext_resource type="Script" path="res://scenes/value_edit_menu/value_edit_menu.gd" id="1_cmjur"]
 [ext_resource type="Theme" uid="uid://bxy7sal2n5myb" path="res://themes/codeblock.tres" id="1_gw1nf"]
 
-[node name="ValueEditMenu" type="PanelContainer"]
-custom_minimum_size = Vector2(32, 32)
-offset_right = 32.0
-offset_bottom = 32.0
+[node name="ValueEditMenu" type="Control"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("1_gw1nf")
-script = ExtResource("1_cmjur")
-
-[node name="SpinBox" type="SpinBox" parent="."]
-layout_mode = 2
-min_value = -9.22337e+15
-max_value = 9.22337e+15
-step = 0.001
-update_on_text_changed = true

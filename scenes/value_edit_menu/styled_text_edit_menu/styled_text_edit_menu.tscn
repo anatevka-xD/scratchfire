@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bftn8khb0n38i"]
+
+[ext_resource type="Theme" uid="uid://bxy7sal2n5myb" path="res://themes/codeblock.tres" id="1_r157x"]
+[ext_resource type="Script" path="res://scenes/value_edit_menu/styled_text_edit_menu/styled_text_edit_menu.gd" id="2_mrrd1"]
+
+[node name="StyledTextEditMenu" type="Control"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_r157x")
+script = ExtResource("2_mrrd1")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 26.0
+text = "Styled Text"
+expand_to_text_length = true
+context_menu_enabled = false

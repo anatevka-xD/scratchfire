@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://otpqj7fxl8el"]
+
+[ext_resource type="Script" path="res://scenes/value_edit_menu/particle_edit_menu/field_input.gd" id="1_4ijlx"]
+
+[node name="FieldInput" type="HBoxContainer"]
+script = ExtResource("1_4ijlx")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0.0"
+expand_to_text_length = true
+context_menu_enabled = false

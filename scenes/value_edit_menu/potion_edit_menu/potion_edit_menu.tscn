@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp37c8o6x8qo0"]
+
+[ext_resource type="Theme" uid="uid://bxy7sal2n5myb" path="res://themes/codeblock.tres" id="1_hj7dd"]
+[ext_resource type="Script" path="res://scenes/value_edit_menu/potion_edit_menu/potion_edit_menu.gd" id="2_xldoo"]
+
+[node name="PotionEditMenu" type="Control"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_hj7dd")
+script = ExtResource("2_xldoo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PotionTypeButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "Select Sound"
+alignment = 0
+icon_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+text = "Amplifier:"
+
+[node name="Amplifier" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "1.0"
+expand_to_text_length = true
+context_menu_enabled = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+text = "Duration:"
+
+[node name="Duration" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Infinite"
+placeholder_text = "00:00"
+expand_to_text_length = true
+context_menu_enabled = false
+
+[connection signal="pressed" from="VBoxContainer/PotionTypeButton" to="." method="_on_potion_type_button_pressed"]
