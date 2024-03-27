@@ -60,7 +60,23 @@ mouse_filter = 2
 theme = ExtResource("2_c4b70")
 disabled = true
 
-[node name="PotionTypeMenu" type="MenuButton" parent="."]
+[node name="PotionTypeMenuButton" type="MenuButton" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+theme = ExtResource("2_c4b70")
+disabled = true
+
+[node name="GameValueTypeMenuButton" type="MenuButton" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+theme = ExtResource("2_c4b70")
+disabled = true
+
+[node name="ParameterMenuButton" type="MenuButton" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 offset_right = 8.0
 offset_bottom = 8.0

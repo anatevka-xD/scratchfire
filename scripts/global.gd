@@ -1,5 +1,30 @@
 extends Node2D
 
+var parameter_types = {
+	"STRING VALUE": 		{"item": "STRING",},
+	"STYLED TEXT VALUE": 	{"item": "BOOK"},
+	"NUMBER VALUE": 		{"item": "SLIME_BALL"},
+	"LOCATION VALUE": 		{"item": "PAPER"},
+	"VECTOR VALUE": 		{"item": "PRISMARINE_SHARD"},
+	"SOUND VALUE": 			{"item": "NAUTILUS_SHELL"},
+	"PARTICLE VALUE": 		{"item": "WHITE_DYE"},
+	"POTION EFFECT VALUE": 	{"item": "DRAGON_BREATH"},
+	"ITEM VALUE": 			{"item": "ITEM_FRAME"},
+	"ANY VALUE":			{"item": "POTATO"},
+	"VARIABLE VALUE":		{"item": "MAGMA_CREAM"},
+	"LIST VALUE":			{"item": "SKULL_BANNER_PATTERN"},
+	"DICTIONARY VALUE": 	{"item": "KNOWLEDGE_BOOK"}
+}
+
+var valid_game_value_categories = [
+	"Statistical Values",
+	"Locational Values",
+	"Item Values",
+	"Informational Values",
+	"Event Values",
+	"Plot Values"
+]
+
 var codeblock_category_display_names = {
 	"Player Action Categories": "PLAYER ACTION",
 	"If Player Categories": "IF PLAYER",
@@ -93,7 +118,19 @@ var entity_target_types = {
 	"PROJECTILE": {"icon": "ARROW"},
 	"ALL ENTITIES": {"icon": "DIAMOND_BLOCK"},
 	"ALL MOBS": {"icon": "BEACON"},
-	"LAST ENTITY SPAWEND": {"icon": "TURTLE_EGG"},
+	"LAST ENTITY SPAWNED": {"icon": "TURTLE_EGG"}
+}
+
+var target_types = {
+	"NONE": {"icon": "GRAY_BARRIER"},
+	"CURRENT SELECTION": {"icon": "NETHER_STAR"},
+	"DEFAULT TARGET": {"icon": "POTATO"},
+	"KILLER TARGET": {"icon": "IRON_SWORD"},
+	"DAMAGER TARGET": {"icon": "STONE_SWORD"},
+	"VICTIM TARGET": {"icon": "SKELETON_SKULL"},
+	"SHOOTER TARGET": {"icon": "BOW"},
+	"PROJECTILE": {"icon": "ARROW"},
+	"LAST ENTITY SPAWNED": {"icon": "TURTLE_EGG"}
 }
 
 var legacy_codeblocks = [
@@ -120,6 +157,8 @@ var codeblock_categories : Dictionary
 var sounds : Dictionary
 var particles : Dictionary
 var potions : Dictionary
+var game_values : Dictionary
+var game_value_categories : Dictionary
 
 var interactables : Array
 var inventories : Array
@@ -150,6 +189,7 @@ func _ready():
 			category_dictionary[category_name] = category_actions
 		
 		codeblock_categories[codeblock_name] = category_dictionary
+	
 	#Set up sounds dictionary
 	for sound in json["sounds"]:
 		sounds[sound["sound"]] = sound
@@ -162,6 +202,20 @@ func _ready():
 	#Set up potions dictionary
 	for potion in json["potions"]:
 		potions[potion["potion"]] = potion
+	
+	#Set up game value categories dictionary
+	for category in json["gameValueCategories"]:
+		var category_name = category["identifier"]
+		if valid_game_value_categories.has(category_name):
+			game_value_categories[category_name] = []
+	
+	#Set up game value dictionary
+	for value in json["gameValues"]:
+		var value_name = strip_color(value["icon"]["name"])
+		game_values[value_name] = value
+		var category = value["category"]
+		
+		game_value_categories[category].append(value_name)
 
 func _process(_delta):
 	#Update selected object's position

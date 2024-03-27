@@ -20,7 +20,7 @@ offset_bottom = 40.0
 [node name="PotionTypeButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Select Sound"
+text = "Potion"
 alignment = 0
 icon_alignment = 2
 

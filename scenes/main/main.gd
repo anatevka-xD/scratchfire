@@ -11,13 +11,17 @@ extends Node2D
 @onready var action_type_menu_button = $ActionTypeMenuButton
 @onready var sound_type_menu_button = $SoundTypeMenuButton
 @onready var particle_type_menu_button = $ParticleTypeMenuButton
-@onready var potion_type_menu_button = $PotionTypeMenu
+@onready var potion_type_menu_button = $PotionTypeMenuButton
+@onready var game_value_type_menu_button = $GameValueTypeMenuButton
+@onready var parameter_menu_button = $ParameterMenuButton
 
 var target_type_menu
 var action_type_menu
 var sound_type_menu
 var particle_type_menu
 var potion_type_menu
+var game_value_type_menu
+var parameter_menu
 
 func _ready():
 	Global.main = self
@@ -26,6 +30,8 @@ func _ready():
 	sound_type_menu = sound_type_menu_button.get_popup()
 	particle_type_menu = particle_type_menu_button.get_popup()
 	potion_type_menu = potion_type_menu_button.get_popup()
+	game_value_type_menu = game_value_type_menu_button.get_popup()
+	parameter_menu = parameter_menu_button.get_popup()
 	
 	#Create variable menu buttons
 	for value_item in Global.value_items:
@@ -53,7 +59,7 @@ func _ready():
 		
 		codeblock_menu.add_child(codeblock_menu_button)
 	
-	#Create sounds popup button
+	#Create sounds popup buttons
 	for sound in Global.json["sounds"]:
 		var sound_display_name = sound["sound"].replace("_", " ").capitalize()
 		var icon_material = sound["icon"]["material"]
@@ -61,7 +67,7 @@ func _ready():
 		
 		sound_type_menu.add_icon_item(icon, Global.strip_color(sound_display_name))
 	
-	#Create particles popup button
+	#Create particles popup buttons
 	for particle in Global.json["particles"]:
 		var particle_display_name = particle["particle"].replace("_", " ").capitalize()
 		var icon_material = particle["icon"]["material"]
@@ -69,7 +75,7 @@ func _ready():
 		
 		particle_type_menu.add_icon_item(icon, Global.strip_color(particle_display_name))
 	
-	#Create potions popup button
+	#Create potions popup buttons
 	for potion in Global.json["potions"]:
 		var potion_display_name = potion["potion"].replace("_", " ").capitalize()
 		var icon_material = potion["icon"]["material"]

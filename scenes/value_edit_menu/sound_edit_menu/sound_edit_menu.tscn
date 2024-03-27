@@ -20,7 +20,7 @@ offset_bottom = 40.0
 [node name="SoundTypeButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Select Sound"
+text = "Sound"
 alignment = 0
 icon_alignment = 2
 
@@ -50,7 +50,7 @@ text = "Pitch:"
 [node name="Pitch" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 10
-text = "0.0"
+text = "1.0"
 expand_to_text_length = true
 context_menu_enabled = false
 
@@ -66,7 +66,7 @@ text = "Volume:"
 [node name="Volume" type="LineEdit" parent="VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 10
-text = "0.0"
+text = "2.0"
 expand_to_text_length = true
 context_menu_enabled = false
 

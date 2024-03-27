@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://5fa5mmtbkaeh"]
+
+[ext_resource type="Theme" uid="uid://bxy7sal2n5myb" path="res://themes/codeblock.tres" id="1_kjp5s"]
+[ext_resource type="Script" path="res://scenes/value_edit_menu/game_value_edit_menu/game_value_edit_menu.gd" id="2_uefjo"]
+
+[node name="GameValueEditMenu" type="Control"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_kjp5s")
+script = ExtResource("2_uefjo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GameValueTypeButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "Game Value"
+alignment = 0
+icon_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Target:"
+
+[node name="TargetButton" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 3
+fit_to_longest_item = false
+
+[connection signal="pressed" from="VBoxContainer/GameValueTypeButton" to="." method="_on_game_value_type_button_pressed"]

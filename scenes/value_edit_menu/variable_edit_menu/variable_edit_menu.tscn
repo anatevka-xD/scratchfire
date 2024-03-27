@@ -20,15 +20,10 @@ offset_bottom = 40.0
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Name:"
-
 [node name="Name" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 text = "Variable"
 expand_to_text_length = true
 context_menu_enabled = false

@@ -64,3 +64,11 @@ func create_edit_menu():
 			edit_menu = load("res://scenes/value_edit_menu/variable_edit_menu/variable_edit_menu.tscn").instantiate()
 			edit_menu.parent = self
 			Global.main.add_child(edit_menu)
+		"GAME VALUE":
+			edit_menu = load("res://scenes/value_edit_menu/game_value_edit_menu/game_value_edit_menu.tscn").instantiate()
+			edit_menu.parent = self
+			Global.main.add_child(edit_menu)
+		"PARAMETER":
+			edit_menu = load("res://scenes/value_edit_menu/parameter_edit_menu/parameter_edit_menu.tscn").instantiate()
+			edit_menu.parent = self
+			Global.main.add_child(edit_menu)
