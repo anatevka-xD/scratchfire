@@ -82,7 +82,9 @@ func _on_action_type_menu_index_pressed(index, menu):
 			var _old_name = codeblock.data["name"]
 			
 			codeblock.data["action"] = action
-			codeblock.inventory.update_tags(_old_name, _old_action)
+			
+			if codeblock.data["has_inventory"]:
+				codeblock.inventory.update_tags(_old_name, _old_action)
 			
 			break
 
