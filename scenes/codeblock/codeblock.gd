@@ -26,7 +26,9 @@ var lower_interactable
 var contents
 var inventory
 
-var data = {}
+var data = {
+	"action": ""
+}
 
 func _ready():
 	

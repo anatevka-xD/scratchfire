@@ -5,6 +5,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4eoq5"]
 
 [resource]
+default_font = ExtResource("1_w4jfc")
+default_font_size = 18
 Button/constants/icon_max_width = 16
 Button/font_sizes/font_size = 18
 Button/fonts/font = ExtResource("1_w4jfc")
@@ -18,8 +20,12 @@ Label/font_sizes/font_size = 18
 Label/fonts/font = ExtResource("1_w4jfc")
 LineEdit/font_sizes/font_size = 18
 LineEdit/fonts/font = ExtResource("1_w4jfc")
+OptionButton/font_sizes/font_size = 18
+OptionButton/fonts/font = ExtResource("1_w4jfc")
 PanelContainer/styles/panel = SubResource("StyleBoxEmpty_4eoq5")
 PopupMenu/constants/icon_max_width = 16
 PopupMenu/font_sizes/font_size = 18
 PopupMenu/fonts/font = ExtResource("1_w4jfc")
+TextEdit/font_sizes/font_size = 18
+TextEdit/fonts/font = ExtResource("1_w4jfc")
 VBoxContainer/constants/separation = 0

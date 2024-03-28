@@ -25,6 +25,7 @@ var parameter_menu
 
 func _ready():
 	Global.main = self
+	
 	target_type_menu = target_type_menu_button.get_popup()
 	action_type_menu = action_type_menu_button.get_popup()
 	sound_type_menu = sound_type_menu_button.get_popup()

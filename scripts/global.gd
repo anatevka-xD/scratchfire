@@ -92,8 +92,7 @@ var value_items = {
 	"POTION EFFECT": 	{"item": "DRAGON_BREATH"},
 	"VARIABLE": 		{"item": "MAGMA_CREAM"},
 	"GAME VALUE": 		{"item": "NAME_TAG"},
-	"PARAMETER": 		{"item": "ENDER_EYE"},
-	"ITEM": 			{"item": "ITEM_FRAME"}
+	"PARAMETER": 		{"item": "ENDER_EYE"}
 }
 
 var player_target_types = {
@@ -144,6 +143,48 @@ var legacy_codeblocks = [
 	"SetName"
 ]
 
+var enchantments = [
+	"AQUA_AFFINITY",
+	"BANE_OF_ARTHROPODS",
+	"BINDING_CURSE",
+	"BLAST_PROTECTION",
+	"CHANNELING",
+	"DEPTH_STRIDER",
+	"EFFICIENCY",
+	"FEATHER_FALLING",
+	"FIRE_ASPECT",
+	"FIRE_PROTECTION",
+	"FLAME",
+	"FORTUNE",
+	"FROST_WALKER",
+	"IMPALING",
+	"INFINITY",
+	"KNOCKBACK",
+	"LOOTING",
+	"LOYALTY",
+	"LUCK_OF_THE_SEA",
+	"LURE",
+	"MENDING",
+	"MULTISHOT",
+	"PIERCING",
+	"POWER",
+	"PROJECTILE_PROTECTION",
+	"PROTECTION",
+	"PUNCH",
+	"QUICK_CHARGE",
+	"RESPIRATION",
+	"RIPTIDE",
+	"SHARPNESS",
+	"SILK_TOUCH",
+	"SMITE",
+	"SOUL_SPEED",
+	"SWEEPING_EDGE",
+	"SWIFT_SNEAK",
+	"THORNS",
+	"UNBREAKING",
+	"VANISHING_CURSE"
+]
+
 var json = JSON.parse_string(FileAccess.get_file_as_string("res://json/actiondump.json"))
 
 var selected_object : Node
@@ -164,6 +205,7 @@ var interactables : Array
 var inventories : Array
 var values : Array
 var items : Array
+var item_types : Array
 
 var dragging = false
 
@@ -216,6 +258,18 @@ func _ready():
 		var category = value["category"]
 		
 		game_value_categories[category].append(value_name)
+	
+	#Set up item types array
+	var dir = DirAccess.open("res://textures/items/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name != "AIR.png":
+				if !file_name.contains(".import"):
+					item_types.append(file_name.replace(".png", ""))
+					
+			file_name = dir.get_next()
 
 func _process(_delta):
 	#Update selected object's position
@@ -233,6 +287,9 @@ func _process(_delta):
 			#Handle codeblock dragging
 			if selected_object.draggable_type == "codeblock":
 				drop_codeblock()
+			
+			if selected_object.draggable_type == "value":
+				drop_value()
 			
 			#Deselect object
 			dragging = false
@@ -376,6 +433,38 @@ func drag_codeblock():
 				selected_object.inventory.move_to_front()
 
 #Values
+func drop_value():
+	var mouse_position = get_global_mouse_position()
+	var hovered_inventories = []
+	var selected_inventory
+	
+	#Get inventories the mouse is over
+	for inventory in inventories:
+		var inventory_rect = Rect2(to_global(inventory.global_position), inventory.size)
+		if inventory_rect.has_point(mouse_position):
+			hovered_inventories.append(inventory)
+	
+	if hovered_inventories.size() > 0:
+		#Select topmost inventory
+		var top_inventory = hovered_inventories[0]
+		
+		for inventory in hovered_inventories:
+			if inventory.parent.get_index() > top_inventory.parent.get_index():
+				top_inventory = inventory
+		
+		#Get slot the mouse is over
+		var slots = top_inventory.parent.inventory.get_children()
+		var hovered_slot
+		
+		for slot in slots:
+			var slot_rect = Rect2(to_global(slot.global_position), slot.size)
+			if slot_rect.has_point(mouse_position):
+				hovered_slot = slot
+		
+		if hovered_slot.contents.get_children().size() == 0:
+			selected_object.custom_minimum_size = Vector2(16, 16)
+			selected_object.reparent(hovered_slot)
+
 func select_value(clicked_object):
 	if clicked_object.get_parent() == main:
 		dragging = true
@@ -395,6 +484,7 @@ func drag_value():
 			dragging = true
 			
 			selected_object.reparent(main)
+			selected_object.custom_minimum_size = Vector2(32, 32)
 
 #Utility functions
 

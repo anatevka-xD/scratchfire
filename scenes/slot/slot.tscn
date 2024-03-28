@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwkvn2bkucgpu"]
+[gd_scene load_steps=3 format=3 uid="uid://dwkvn2bkucgpu"]
 
 [ext_resource type="Texture2D" uid="uid://cwudguyaieslo" path="res://textures/gui/slot.png" id="1_7hsyu"]
+[ext_resource type="Script" path="res://scenes/slot/slot.gd" id="1_lekfc"]
 
 [node name="Slot" type="PanelContainer"]
 texture_filter = 1
+script = ExtResource("1_lekfc")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("1_7hsyu")
+
+[node name="Contents" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2

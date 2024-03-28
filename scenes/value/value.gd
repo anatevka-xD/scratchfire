@@ -25,6 +25,7 @@ func _on_draggable_gui_input(event):
 				edit_menu.hide()
 			else:
 				edit_menu.show()
+				edit_menu.move_to_front()
 
 func create_edit_menu():
 	match type:

@@ -78,6 +78,11 @@ func _on_action_type_menu_index_pressed(index, menu):
 		var action_display_name = Global.strip_color(Global.codeblock_actions[codeblock_name][action]["icon"]["name"])
 		
 		if action_type == action_display_name:
+			var _old_action = codeblock.data["action"]
+			var _old_name = codeblock.data["name"]
+			
 			codeblock.data["action"] = action
+			codeblock.inventory.update_tags(_old_name, _old_action)
+			
 			break
 

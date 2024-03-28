@@ -18,30 +18,30 @@ func _on_particle_type_button_pressed():
 	#Disconnect all signals from popup menu
 	for connected_signal in particle_type_menu.get_signal_connection_list("index_pressed"):
 		particle_type_menu.index_pressed.disconnect(connected_signal["callable"])
-	
+
 	#Connect value to the popupmenu 
 	particle_type_menu.index_pressed.connect(_on_particle_type_menu_index_pressed.bind(particle_type_menu))
-	
+
 	#Position target type menu button
 	particle_type_menu_button.position = global_position + Vector2(0, 0)
-	
+
 	#Show the popup menu
 	particle_type_menu_button.show_popup()
 
 func _on_particle_type_menu_index_pressed(index, menu):
 	var particle_name = menu.get_item_text(index)
 	particle = particle_name.replace(" ", "_").to_upper()
-	
+
 	fields = ["Amount", "Spread"]
 	fields.append_array(Global.particles[particle]["fields"])
 	for child in fields_container.get_children():
 		child.queue_free()
-	
+
 	for field in fields:
 		var new_field_input = field_input.instantiate()
 		fields_container.add_child(new_field_input)
 		new_field_input.label.text = field + ":"
-		
+
 		match field:
 			"Amount":
 				new_field_input.line_edit.text = "1"
@@ -70,6 +70,5 @@ func _on_particle_type_menu_index_pressed(index, menu):
 			"Size Variation":
 				new_field_input.line_edit.text = "0%"
 				new_field_input.line_edit.placeholder_text = "0%"
-	
+
 	particle_type_button.text = particle_name 
-	

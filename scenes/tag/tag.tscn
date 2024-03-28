@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjnttcfge4tb6"]
+
+[ext_resource type="Texture2D" uid="uid://btdjih2ma677i" path="res://textures/items/MISSING_TEXTURE.png" id="1_fb34p"]
+[ext_resource type="Script" path="res://scenes/tag/tag.gd" id="1_i0tro"]
+[ext_resource type="Theme" uid="uid://bxy7sal2n5myb" path="res://themes/codeblock.tres" id="3_y3eqg"]
+[ext_resource type="FontFile" uid="uid://bi8fx3dpcndfd" path="res://fonts/Minecraft.otf" id="4_tdnm5"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_45273"]
+
+[node name="Tag" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+clip_contents = true
+offset_right = 16.0
+offset_bottom = 16.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("1_i0tro")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("1_fb34p")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Options" type="OptionButton" parent="Control"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+offset_right = 30.0
+offset_bottom = 16.0
+size_flags_horizontal = 0
+theme = ExtResource("3_y3eqg")
+theme_override_constants/h_separation = 0
+theme_override_fonts/font = ExtResource("4_tdnm5")
+theme_override_font_sizes/font_size = 18
+theme_override_icons/arrow = SubResource("CanvasTexture_45273")
+flat = true
+expand_icon = true
+fit_to_longest_item = false
+
+[connection signal="item_selected" from="Control/Options" to="." method="_on_options_item_selected"]
